@@ -11,7 +11,7 @@ class input extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
-      height: 50,
+      height: 70,
       decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(
@@ -29,11 +29,13 @@ class input extends StatelessWidget {
             color: Colors.white,
           ),
           hintText: label,
-          hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(
+            color: Colors.white,
+          ),
         ),
         validator: (String? value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter some text';
+            return 'remplire les champs';
           }
           return null;
         },

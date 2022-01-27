@@ -1,6 +1,7 @@
 import 'package:connection/Form/component/creecompte.dart';
 import 'package:connection/Form/component/input.dart';
 import 'package:connection/view/bienvenue.dart';
+import 'package:connection/view/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
 
 TextEditingController controller_username = TextEditingController();
@@ -77,9 +78,23 @@ class _LoginState extends State<Login> {
                 child: input('Identifiant', Icons.person, controller_username),
               ),
               Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child:
-                      input('Mot de passe', Icons.vpn_key, controller_passord)),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: input('Mot de passe', Icons.vpn_key, controller_passord),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: TextButton(
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => creecompte(),
+                    //   ),
+                    // );
+                  },
+                  child: Text('Mot de passe oublié ?'),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Container(
@@ -98,7 +113,9 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     onPressed: () {
-                      login();
+                      if (_formKey.currentState!.validate()) {
+                        login();
+                      }
                     },
                     child: const Text(
                       'Se connecter',
@@ -107,7 +124,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              creeCompte(),
+              CreeCompte(),
             ],
           ),
         ),

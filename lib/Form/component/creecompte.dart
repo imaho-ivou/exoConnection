@@ -1,10 +1,7 @@
+import 'package:connection/view/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
 
-class creeCompte extends StatelessWidget {
-  const creeCompte({
-    Key? key,
-  }) : super(key: key);
-
+class CreeCompte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -15,7 +12,14 @@ class creeCompte extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageCreeCompte(),
+              ),
+            );
+          },
           child: Text('Compte?'),
         ),
       ],

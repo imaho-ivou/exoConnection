@@ -1,3 +1,4 @@
+import 'package:connection/Form/component/creecompte.dart';
 import 'package:connection/Form/component/input.dart';
 import 'package:connection/view/bienvenue.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,9 @@ class _LoginState extends State<Login> {
     String User = 'a';
     String mdp = 'a';
     if ((nomlogin.toString() == User) && (mdpLogin.toString() == mdp)) {
+      controller_passord.text = '';
+      controller_username.text = '';
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => bienvenue()),
@@ -45,14 +49,14 @@ class _LoginState extends State<Login> {
     }
   }
 
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-
-    controller_username.dispose();
-    controller_passord.dispose();
-
-    dispose();
-  }
+  // void dispose() {
+  //   // Clean up the controller when the widget is disposed.
+  //
+  //   controller_username.dispose();
+  //   controller_passord.dispose();
+  //
+  //   dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -103,13 +107,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Text(
-                'or',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
+              creeCompte(),
             ],
           ),
         ),

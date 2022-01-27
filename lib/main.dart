@@ -1,9 +1,9 @@
 import 'package:connection/Form/component/input.dart';
+import 'package:connection/view/bienvenue.dart';
 import 'package:flutter/material.dart';
 
 TextEditingController controller_username = TextEditingController();
 TextEditingController controller_passord = TextEditingController();
-
 void main() {
   runApp(MyApp());
 }
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.black,
         body: Login(),
       ),
     );
@@ -33,18 +33,26 @@ class _LoginState extends State<Login> {
   login() {
     String nomlogin = controller_username.text;
     String mdpLogin = controller_passord.text;
-    String resultat = nomlogin + ' ' + mdpLogin;
-
-    print(resultat);
+    String User = 'a';
+    String mdp = 'a';
+    if ((nomlogin.toString() == User) && (mdpLogin.toString() == mdp)) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => bienvenue()),
+      );
+    } else {
+      print(nomlogin);
+    }
   }
 
-  // void dispose() {
-  //   // Clean up the controller when the widget is disposed.
-  //   controller_username.dispose();
-  //   controller_passord.dispose();
-  //
-  //   dispose();
-  // }
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+
+    controller_username.dispose();
+    controller_passord.dispose();
+
+    dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +63,11 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image(
+                width: 300,
+                height: 300,
+                image: AssetImage('image/logo.png'),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: input('Identifiant', Icons.person, controller_username),
@@ -68,21 +81,33 @@ class _LoginState extends State<Login> {
                 child: Container(
                   width: 400,
                   height: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      )),
+                  decoration: BoxDecoration(),
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          side: BorderSide(color: Colors.blueAccent),
+                        ),
+                      ),
+                    ),
                     onPressed: () {
-                      // Validate will return true if the form is valid, or false if
-                      // the form is invalid.
-                      if (_formKey.currentState!.validate()) {
-                        login();
-                      }
+                      login();
                     },
-                    child: const Text('Submit'),
+                    child: const Text(
+                      'Se connecter',
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
+                ),
+              ),
+              Text(
+                'or',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
                 ),
               ),
             ],

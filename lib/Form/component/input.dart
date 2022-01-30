@@ -7,16 +7,16 @@ class input extends StatelessWidget {
   input(this.label, this.Icone, this.controllerField);
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Container(
       width: 400,
       height: 70,
       decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          )),
+        color: Colors.black,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
       child: TextFormField(
         controller: controllerField,
         style: TextStyle(color: Colors.white, fontSize: 20),

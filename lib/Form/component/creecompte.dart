@@ -1,14 +1,17 @@
-import 'package:connection/view/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
 
 class CreeCompte extends StatelessWidget {
+  final String text;
+  final String textBouton;
+  final redirection;
+  CreeCompte(this.text, this.textBouton, this.redirection);
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Créer un',
+          text,
           style: TextStyle(color: Colors.white),
         ),
         TextButton(
@@ -16,11 +19,11 @@ class CreeCompte extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PageCreeCompte(),
+                builder: (context) => redirection,
               ),
             );
           },
-          child: Text('Compte?'),
+          child: Text(textBouton),
         ),
       ],
     );

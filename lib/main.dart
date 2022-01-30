@@ -1,6 +1,7 @@
 import 'package:connection/Form/component/creecompte.dart';
 import 'package:connection/Form/component/input.dart';
 import 'package:connection/view/bienvenue.dart';
+import 'package:connection/view/mdpOublier.dart';
 import 'package:connection/view/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +25,6 @@ class MyApp extends StatelessWidget {
 }
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
-
   @override
   _LoginState createState() => _LoginState();
 }
@@ -49,15 +48,6 @@ class _LoginState extends State<Login> {
       print(nomlogin);
     }
   }
-
-  // void dispose() {
-  //   // Clean up the controller when the widget is disposed.
-  //
-  //   controller_username.dispose();
-  //   controller_passord.dispose();
-  //
-  //   dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +75,12 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: TextButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => creecompte(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => mdpOublier(),
+                      ),
+                    );
                   },
                   child: Text('Mot de passe oublié ?'),
                 ),
@@ -124,7 +114,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              CreeCompte(),
+              CreeCompte('Créer un', 'Compte?', PageCreeCompte()),
             ],
           ),
         ),

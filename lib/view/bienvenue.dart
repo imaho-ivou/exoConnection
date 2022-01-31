@@ -1,13 +1,43 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
 
-class bienvenue extends StatelessWidget {
+class bienvenue extends StatefulWidget {
+  const bienvenue({Key? key}) : super(key: key);
+
+  @override
+  _bienvenueState createState() => _bienvenueState();
+}
+
+class _bienvenueState extends State<bienvenue> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
       body: Center(
-        child: Text('bonjour $User'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Bienvenue  ${auth.currentUser}',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => MyApp(),
+                    ),
+                  );
+                },
+                child: Text('Sign out'))
+          ],
+        ),
       ),
     );
   }

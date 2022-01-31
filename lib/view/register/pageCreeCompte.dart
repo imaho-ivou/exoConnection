@@ -9,8 +9,8 @@ TextEditingController controller_userIdentifiantInscription =
     TextEditingController();
 TextEditingController controller_userPassewordInscription =
     TextEditingController();
-TextEditingController controller_userConfPassewordInscription =
-    TextEditingController();
+// TextEditingController controller_userConfPassewordInscription =
+//     TextEditingController();
 
 class PageCreeCompte extends StatefulWidget {
   @override
@@ -66,13 +66,8 @@ class _PageCreeCompteState extends State<PageCreeCompte> {
                               method: auth.createUserWithEmailAndPassword,
                               chemin: MyApp(),
                               context: context);
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => MyApp(),
-                          //   ),
-                          // );
                         }
+                        print(controller_userIdentifiantInscription.text);
                       },
                       child: const Text(
                         "S'inscrire",

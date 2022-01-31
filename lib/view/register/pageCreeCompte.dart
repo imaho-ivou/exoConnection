@@ -1,6 +1,7 @@
 import 'package:connection/Form/component/creecompte.dart';
 import 'package:connection/Form/component/input.dart';
 import 'package:connection/main.dart';
+import 'package:connection/view/register/fire_auth.dart';
 import 'package:flutter/material.dart';
 
 TextEditingController controller_userEmailInscription = TextEditingController();
@@ -35,8 +36,8 @@ class _PageCreeCompteState extends State<PageCreeCompte> {
                 input('Email', Icons.email, controller_userEmailInscription),
                 input('Nouveau mot passe', Icons.password,
                     controller_userPassewordInscription),
-                input('Confirmation mot passe', Icons.password,
-                    controller_userConfPassewordInscription),
+                // input('Confirmation mot passe', Icons.password,
+                //     controller_userConfPassewordInscription),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Container(
@@ -56,7 +57,22 @@ class _PageCreeCompteState extends State<PageCreeCompte> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
+                        if (_formKey.currentState!.validate()) {
+                          FireAuth.registerUsingEmailPassword(
+                              name: controller_userIdentifiantInscription.text,
+                              email: controller_userEmailInscription.text,
+                              password:
+                                  controller_userPassewordInscription.text,
+                              method: auth.createUserWithEmailAndPassword,
+                              chemin: MyApp(),
+                              context: context);
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => MyApp(),
+                          //   ),
+                          // );
+                        }
                       },
                       child: const Text(
                         "S'inscrire",

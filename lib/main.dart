@@ -2,7 +2,8 @@ import 'package:connection/Form/component/creecompte.dart';
 import 'package:connection/Form/component/input.dart';
 import 'package:connection/view/bienvenue.dart';
 import 'package:connection/view/mdpOublier.dart';
-import 'package:connection/view/pageCreeCompte.dart';
+import 'package:connection/view/register/fire_auth.dart';
+import 'package:connection/view/register/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -42,31 +43,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  login() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: controller_username.text,
-              password: controller_passord.text);
-      if (userCredential != null) {
-        return Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => bienvenue(),
-          ),
-        );
-      }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-      print(FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: controller_username.text, password: controller_passord.text));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,10 +98,21 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     onPressed: () {
-                      login();
-                      // if (_formKey.currentState!.validate()) {
-                      //   ;
-                      // }
+                      //login();
+                      if (_formKey.currentState!.validate()) {
+                        FireAuth.registerUsingEmailPassword(
+                            email: controller_username.text,
+                            password: controller_passord.text,
+                            method: auth.signInWithEmailAndPassword,
+                            chemin: bienvenue(),
+                            context: context);
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => bienvenue(),
+                        //   ),
+                        // );
+                      }
                     },
                     child: const Text(
                       'Se connecter',

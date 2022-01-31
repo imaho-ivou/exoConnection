@@ -6,6 +6,9 @@ import 'package:connection/view/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+FirebaseAuth auth = FirebaseAuth.instance;
 
 TextEditingController controller_username = TextEditingController();
 
@@ -40,21 +43,28 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  login() {
-    String nomlogin = controller_username.text;
-    String mdpLogin = controller_passord.text;
-    String User = 'a';
-    String mdp = 'a';
-    if ((nomlogin.toString() == User) && (mdpLogin.toString() == mdp)) {
-      controller_passord.text = '';
-      controller_username.text = '';
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => bienvenue()),
-      );
-    } else {
-      print(nomlogin);
+  login() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: controller_username.text,
+              password: controller_passord.text);
+      if (userCredential != null) {
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => bienvenue(),
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+      print(FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: controller_username.text, password: controller_passord.text));
     }
   }
 
@@ -112,9 +122,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        login();
-                      }
+                      login();
+                      // if (_formKey.currentState!.validate()) {
+                      //   ;
+                      // }
                     },
                     child: const Text(
                       'Se connecter',

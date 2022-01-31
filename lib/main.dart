@@ -4,10 +4,18 @@ import 'package:connection/view/bienvenue.dart';
 import 'package:connection/view/mdpOublier.dart';
 import 'package:connection/view/pageCreeCompte.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 TextEditingController controller_username = TextEditingController();
+
 TextEditingController controller_passord = TextEditingController();
-void main() {
+String User = 'a';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -31,6 +39,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   login() {
     String nomlogin = controller_username.text;
     String mdpLogin = controller_passord.text;

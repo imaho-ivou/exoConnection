@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class bienvenue extends StatelessWidget {
-  const bienvenue({Key? key}) : super(key: key);
+import '../main.dart';
 
+class bienvenue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(),
+      body: Center(
+        child: Text('bonjour $User'),
+      ),
     );
   }
 }

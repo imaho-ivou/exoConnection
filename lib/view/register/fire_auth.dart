@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class FireAuth {
   static Future<User?> registerUsingEmailPassword({
-    String? name,
+    name,
     required String email,
     required String password,
     required method,
@@ -18,18 +18,19 @@ class FireAuth {
         email: email,
         password: password,
       );
-      if (userCredential != null) {
-        return Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => chemin,
-          ),
-        );
-      }
       user = userCredential.user;
-      await user!.updateDisplayName(name);
-      await user.reload();
-      user = auth.currentUser;
+      if (name != null) {
+        user?.updateDisplayName(name);
+        // await user?.updateDisplayName(name);
+        user?.reload();
+        user = auth.currentUser;
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => chemin,
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

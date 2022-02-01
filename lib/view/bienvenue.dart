@@ -14,15 +14,12 @@ class _bienvenueState extends State<bienvenue> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Bienvenue  ${auth.currentUser}',
+              'Bienvenue  ${auth.currentUser?.displayName}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             ElevatedButton(
